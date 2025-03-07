@@ -1,0 +1,25 @@
+.rating {
+  font-size: 18px;
+}
+
+.filled-star {
+  color: gold; 
+}
+
+.half-star {
+  color: orange;
+}
+
+.empty-star {
+  color: #ccc;
+}
+
+.product-image {
+  height: 200px;
+  object-fit: contain;
+  background-color: #3333331e !important;
+  padding: 10px;
+}
+.price{
+  color: rgb(81, 198, 81);
+}

@@ -1,0 +1,37 @@
+/* خلفية جميلة للصفحة */
+body {
+  background-color: #f8f9fa;
+}
+
+/* تنسيق للنموذج داخل البطاقة */
+.card {
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* تنسيق النصوص في البطاقة */
+.card-title {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* تنسيق للحواف في الزر */
+.btn-lg {
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, .5);
+}

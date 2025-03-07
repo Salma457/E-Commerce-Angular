@@ -1,0 +1,31 @@
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card shadow-lg" style="width: 400px;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Login to Your Account</h3>
+
+      <form>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid gap-2 mb-3">
+          <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </div>
+
+        <!-- Register Link -->
+        <div class="text-center">
+          <p>Don't have an account? <a routerLink="/register" class="text-primary">Register here</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

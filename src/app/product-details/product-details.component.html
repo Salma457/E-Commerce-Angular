@@ -1,0 +1,57 @@
+<div *ngIf="product" class="container my-5">
+  <div class="row justify-content-center align-items-center text-light">
+    <div class="col-12 col-md-6 d-flex align-items-center position-relative">
+      <img [src]="product.images[0]" class="img-fluid rounded shadow-lg" alt="{{ product.title }}">
+      <p [ngClass]="{
+        'bg-success': product.stock > 0,
+        'bg-danger': product.stock === 0,
+        'text-white': true,
+        'position-absolute': true,
+        'top-0': true,
+        'start-0': true,
+        'p-3': true,
+        'fw-bold': true,
+        'rounded-end': true
+      }" class="stock-status">
+        {{ product.stock > 0 ? 'In Stock' : 'Out of Stock' }}
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="product-details text-light">
+        <h1 class="product-title text-light">{{ product.title }}</h1>
+        <p class=" text-light">{{ product.description }}</p>
+        <p class="fw-bold fs-4 text-primary">{{ product.price }}$</p>
+
+        <!-- Rating Section -->
+        <div class="rating mb-3">
+          <span *ngFor="let star of getFullStars(product.rating)">
+            <span class="filled-star">★</span>
+          </span>
+          <span *ngIf="getHalfStar(product.rating)">
+            <span class="half-star">★</span>
+          </span>
+          <span *ngFor="let star of getEmptyStars(product.rating)">
+            <span class="empty-star">★</span>
+          </span>
+        </div>
+
+        <!-- More Information (Category and Brand) -->
+        <div class="mb-3">
+          <p><strong>Category:</strong> {{ product.category }}</p>
+          <p><strong>Brand:</strong> {{ product.brand }}</p>
+        </div>
+
+        <div class="d-flex align-items-center mb-3">
+          <span class="me-3"><strong>Only {{ product.stock }} left!</strong></span>
+          <button class="btn btn-primary me-2">Buy Now</button>
+          <button class="btn btn-outline-success">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!product" class="container text-center my-5">
+  <p class="fs-4 text-danger">Product not found.</p>
+</div>
