@@ -31,7 +31,7 @@ export const routes: Routes = [
     path:"cart",
     component:CartComponent,
     title:'cart',
-    canActivate:[authGuard]
+    // canActivate:[authGuard]
   },
   {
     //wildcard syntx

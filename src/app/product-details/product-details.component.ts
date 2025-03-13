@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import productlist from "/home/iti/angular/task3/day3/public/assets/products.json";
+// import productlist from "/home/iti/angular/task3/day3/public/assets/products.json";
 import { CommonModule } from '@angular/common';
+import { ProductsRequestService } from '../products-request.service';
 
 
 @Component({
@@ -11,19 +12,28 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent {
-  productList=productlist;
+  // productList=productlist;
   // constructor(private activatedRoute:ActivatedRoute){}
+
 
 @Input() id :string='';
 product:any;
+constructor(private productsRequestService:ProductsRequestService,private activatedRoute:ActivatedRoute){
+
+
+}
 ngOnChanges(){
   console.log(this.id)
 }
   ngOnInit(){
-    // console.log(this.activatedRoute.snapshot.params['id'])
-    console.log(this.id)
-  this.product=this.productList.find(product=>product.id===Number(this.id));
-  console.log(this.product)
+   this.productsRequestService
+   .getProductDetails(this.id)
+   .subscribe((response)=>{
+     this.product=response
+   },(err)=>console.log(err))
+  //   console.log(this.id)
+  // this.product=this.productList.find(product=>product.id===Number(this.id));
+  // console.log(this.product)
   }
 
 

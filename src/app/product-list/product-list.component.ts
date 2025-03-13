@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import productlist from "/home/iti/angular/task3/day3/public/assets/products.json";
+// import productlist from "/home/iti/angular/task3/day3/public/assets/products.json";
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProductsRequestService } from '../products-request.service';
 @Component({
   selector: 'app-product-list',
   imports: [CommonModule],
@@ -9,12 +10,13 @@ import { Router } from '@angular/router';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
-productList=productlist;
+// productList=productlist;
+
+productList !:any[];
+productListService=inject(ProductsRequestService);
 
 // router = inject(Router);
-constructor(private router:Router){
-
-}
+constructor(private router:Router){}
 // productList :Array<any>= [
 //   {
 //     "id": 1,
@@ -1616,7 +1618,17 @@ constructor(private router:Router){
 //     "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png"
 //   }
 // ];
-ngOnInit(): void {}
+
+
+
+ngOnInit() {
+  this.productListService.getProductsList().subscribe((response) => {
+    console.log(response);
+    this.productList = response.products;
+    console.log(this.productList);
+  }
+  );
+}
   getFullStars(rating: number): number[] {
     return new Array(Math.floor(rating));
   }
@@ -1632,5 +1644,9 @@ ngOnInit(): void {}
   handleRedirectToDetails(id:number)
   {
    this.router.navigate(['/product-details',id])
+  }
+  handleRedirectToCart(id:number)
+  {
+    this.router.navigate(['/cart',id])
   }
 }
