@@ -1624,10 +1624,8 @@ constructor(private router:Router){}
 
 ngOnInit() {
   this.productListService.getProductsList().subscribe((response) => {
-    console.log(response);
     this.productList = response.products;
-    console.log(this.productList);
-  }
+    }
   );
 
   const savedCart = localStorage.getItem('cart');
@@ -1639,13 +1637,14 @@ addToCart(product: any) {
   const existingProduct = this.cart.find((p) => p.id === product.id);
 
   if (existingProduct) {
-    this.showNotification('product is already exist in the cart','error');
-  } else {
+    existingProduct.quantity++;
+    this.showNotification('Product quantity updated', 'info');  } else {
     this.cart.push({ ...product, quantity: 1 });
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.counterService.setCounter(this.cart.length);
     this.showNotification('Product added to cart successfully','success');
   }
+  localStorage.setItem('cart', JSON.stringify(this.cart));
 }
   getFullStars(rating: number): number[] {
     return new Array(Math.floor(rating));
@@ -1665,7 +1664,7 @@ addToCart(product: any) {
   }
 
 
-  showNotification(message: string, type: 'success' | 'error') {
+  showNotification(message: string, type: 'success' | 'info' ) {
     this.notification.message = message;
     this.notification.type = type;
     setTimeout(() => {

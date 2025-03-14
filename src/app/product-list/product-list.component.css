@@ -43,7 +43,7 @@
   color: white;
 }
 
-.error {
-  background-color: #dc3545;
-  color: white;
+.info {
+  background-color: #a9c43e;
+  color: rgb(226, 226, 226);
 }
