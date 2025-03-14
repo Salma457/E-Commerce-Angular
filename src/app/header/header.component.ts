@@ -14,7 +14,7 @@ export class HeaderComponent {
   ngOnInit(){
     this.counterService.getCounter().subscribe((response)=>{
       this.counter=response;
-      console.log(this.counter);
+      // console.log(this.counter);
     });
   }
 

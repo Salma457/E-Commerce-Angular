@@ -1,3 +1,8 @@
+<div *ngIf="notification.message" class="notification-container" [ngClass]="notification.type">
+  {{ notification.message }}
+</div>
+
+
 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 mx-2 my-5 bg-dark">
   @for(product of productList; track product.id){
     <div class="col">
@@ -38,7 +43,7 @@
             </span>
           </div>
 
-          <button class="btn btn-success mt-auto" (click)=" handleRedirectToCart(product.id)" >Add to Cart</button>
+          <button class="btn btn-success mt-auto" (click)="addToCart(product)" >Add to Cart</button>
           <!-- <a href="/cart" class="btn btn-success mt-auto"(click)=" handleRedirectToCart(product.id)">Add to Cart</a> -->
 
         </div>

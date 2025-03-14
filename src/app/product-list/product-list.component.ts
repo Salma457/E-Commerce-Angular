@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductsRequestService } from '../products-request.service';
+import { CounterServiceService } from '../counter-service.service';
 @Component({
   selector: 'app-product-list',
   imports: [CommonModule],
@@ -10,15 +11,16 @@ import { ProductsRequestService } from '../products-request.service';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
-// productList=productlist;
 
 productList !:any[];
+cart: any[] = [];
+notification = { message: '', type: '' };
 productListService=inject(ProductsRequestService);
+counterService = inject(CounterServiceService);
 
 // router = inject(Router);
 constructor(private router:Router){}
-// productList :Array<any>= [
-//   {
+
 //     "id": 1,
 //     "title": "Essence Mascara Lash Princess",
 //     "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
@@ -1627,6 +1629,23 @@ ngOnInit() {
     console.log(this.productList);
   }
   );
+
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    this.cart = JSON.parse(savedCart);
+  }
+}
+addToCart(product: any) {
+  const existingProduct = this.cart.find((p) => p.id === product.id);
+
+  if (existingProduct) {
+    this.showNotification('product is already exist in the cart','error');
+  } else {
+    this.cart.push({ ...product, quantity: 1 });
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.counterService.setCounter(this.cart.length);
+    this.showNotification('Product added to cart successfully','success');
+  }
 }
   getFullStars(rating: number): number[] {
     return new Array(Math.floor(rating));
@@ -1644,8 +1663,13 @@ ngOnInit() {
   {
    this.router.navigate(['/product-details',id])
   }
-  handleRedirectToCart(id:number)
-  {
-    this.router.navigate(['/cart',id])
+
+
+  showNotification(message: string, type: 'success' | 'error') {
+    this.notification.message = message;
+    this.notification.type = type;
+    setTimeout(() => {
+      this.notification.message = '';
+    }, 3000);
   }
 }

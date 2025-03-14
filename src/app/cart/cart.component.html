@@ -1,4 +1,56 @@
-<h2 class="text-light container">Cart</h2>
+
+<div class="container cart-container bg-dark text-light my-5" >
+  <h2 class="mb-4  ">Cart</h2>
+
+  <div *ngIf="cart.length === 0" class="alert alert-warning text-center">
+    <strong>Cart is Empty</strong>
+  </div>
+
+  <table class="table  " *ngIf="cart.length > 0">
+    <thead>
+      <tr class="cart-header">
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of cart">
+        <td>
+          <div class="d-flex align-items-center">
+            <img [src]="product.images[0]" class="cart-img me-3" alt="Product Image">
+            <div>
+              <strong>{{ product.title }}</strong><br />
+              <small>Category: {{ product.category }}</small>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-danger" (click)="updateQuantity(product.id, -1)">-</button>
+            <p class="mx-4 my-0 text-dark">{{ product.quantity }}</p>
+            <button class="btn btn-dark" (click)="updateQuantity(product.id, 1)">+</button>
+          </div>
+        </td>
+        <td>
+          <button class="remove-btn" (click)="removeProduct(product.id)">&times;</button>
+        </td>
+        <td>£{{ product.price * product.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total-container" *ngIf="cart.length > 0">
+    Total: £{{ getTotalPrice() }}.00
+  </div>
+
+</div>
+
+
+
+
+<!-- <h2 class="text-light container">Cart</h2>
 <hr/>
 <div class="container cart-container">
   <h2 class="mb-4">Cart</h2>
@@ -29,7 +81,6 @@
     <button class="btn btn-dark" (click)="increaseCounter()">+1</button>
                 </div>
             </td>
-            <!-- <td><button class="remove-btn" (click)="removeProduct()">&times;</button></td> -->
             <td>£55</td>
         </tr>
 
@@ -38,11 +89,11 @@
 
 <div class="total-container">
     Total: £110.00
-</div>
+</div> -->
 <!-- <div *ngIf="isRemoved" class="alert alert-warning text-center mt-4">
   <strong>تمت إزالة المنتج من السلة.</strong>
 </div> -->
-</div>
+<!-- </div> -->
 
 
 

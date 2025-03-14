@@ -17,28 +17,39 @@ export class CartComponent {
   constructor(private activatedRoute:ActivatedRoute,private counterService : CounterServiceService, private productService: ProductsRequestService){}
 
   @Input() id:string='';
-  product:any;
+  cart:any[]=[];
 
-  ngOnInit(){
-    this.counterService.getCounter().subscribe((response)=>{
-      this.counter=response;
-      console.log(this.counter);
-    })
-    this.productService.getProductDetails(this.id).subscribe((response)=>{
-      this.product=response;
-    },(err)=>console.log(err));
+  ngOnInit() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+    }
+    this.updateCartCounter();
+  }
+  removeProduct(productId: number) {
+    this.cart = this.cart.filter((product) => product.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.updateCartCounter();
+
+  }
+  updateQuantity(productId: number, change: number) {
+    const product = this.cart.find((p) => p.id === productId);
+    if (product) {
+      product.quantity += change;
+      if (product.quantity <= 0) {
+        this.removeProduct(productId);
+      } else {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      }
+    }
+    this.updateCartCounter();
+  }
+  updateCartCounter() {
+    const totalQuantity = this.cart.reduce((total, product) => total + product.quantity, 0);
+    this.counterService.setCounter(totalQuantity);
+  }
+  getTotalPrice(): number {
+    return this.cart.reduce((sum, product) => sum + (product.price * product.quantity), 0);
   }
 
-  decreseCounter(){
-    this.counterService.setCounter(this.counter-1);
-  }
-  increaseCounter(){
-    this.counterService.setCounter(this.counter+1);
-  }
-  // removeProduct(productId:string) {
-  //   this.product = this.product.filter((produc:)=>{
-  //     return produc.id !== productId;
-  //   })
-  //   this.counterService.setCounter(0); // ✅ تصفير العداد
-  //   console.log(`تمت إزالة المنتج ID: ${productId} من السلة`);  }
 }
