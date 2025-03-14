@@ -28,7 +28,7 @@ export const routes: Routes = [
     title:'register'
   },
   {
-    path:"cart",
+    path:"cart/:id",
     component:CartComponent,
     title:'cart',
     // canActivate:[authGuard]

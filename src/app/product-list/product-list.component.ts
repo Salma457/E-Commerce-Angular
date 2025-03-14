@@ -1620,7 +1620,6 @@ constructor(private router:Router){}
 // ];
 
 
-
 ngOnInit() {
   this.productListService.getProductsList().subscribe((response) => {
     console.log(response);

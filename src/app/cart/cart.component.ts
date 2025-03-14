@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsRequestService } from '../products-request.service';
 // import { inject } from '@angular/core/testing';
 import { Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ import { Input } from '@angular/core';
 })
 export class CartComponent {
   counter : number = 0;
-  constructor(private counterService : CounterServiceService, private productService: ProductsRequestService){}
+  constructor(private activatedRoute:ActivatedRoute,private counterService : CounterServiceService, private productService: ProductsRequestService){}
 
   @Input() id:string='';
   product:any;
@@ -34,4 +35,10 @@ export class CartComponent {
   increaseCounter(){
     this.counterService.setCounter(this.counter+1);
   }
+  // removeProduct(productId:string) {
+  //   this.product = this.product.filter((produc:)=>{
+  //     return produc.id !== productId;
+  //   })
+  //   this.counterService.setCounter(0); // ✅ تصفير العداد
+  //   console.log(`تمت إزالة المنتج ID: ${productId} من السلة`);  }
 }
