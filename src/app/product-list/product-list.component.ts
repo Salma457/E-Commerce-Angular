@@ -1621,7 +1621,6 @@ constructor(private router:Router){}
 //   }
 // ];
 
-
 ngOnInit() {
   this.productListService.getProductsList().subscribe((response) => {
     this.productList = response.products;

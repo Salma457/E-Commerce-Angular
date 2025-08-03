@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CounterServiceService } from '../counter-service.service';
 import { CommonModule } from '@angular/common';
 import { ProductsRequestService } from '../products-request.service';
-// import { inject } from '@angular/core/testing';
-import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,10 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
-  counter : number = 0;
   constructor(private activatedRoute:ActivatedRoute,private counterService : CounterServiceService, private productService: ProductsRequestService){}
-
-  @Input() id:string='';
   cart:any[]=[];
 
   ngOnInit() {

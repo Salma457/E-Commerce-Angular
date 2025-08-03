@@ -1,14 +1,11 @@
-/* 🛒 تنسيق الحاوية الرئيسية */
 .cart-container {
-  background: #222; /* خلفية داكنة */
+  background: #222;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   max-width: 900px;
   margin: auto;
 }
-
-/* 🛍️ عنوان السلة */
 .cart-container h2 {
   text-align: center;
   font-weight: bold;
@@ -16,8 +13,6 @@
   border-bottom: 2px solid #28a745;
   padding-bottom: 10px;
 }
-
-/* 🚨 تنسيق رسالة السلة الفارغة */
 .alert-warning {
   font-size: 18px;
   font-weight: bold;
@@ -26,23 +21,17 @@
   border-radius: 8px;
   padding: 15px;
 }
-
-/* 🎨 جدول المنتجات */
 .table {
   background: #333;
   color: #fff;
   border-radius: 10px;
   overflow: hidden;
 }
-
-/* 🏷️ ترويسة الجدول */
 .cart-header {
   background: #28a745;
   color: white;
   font-weight: bold;
 }
-
-/* 🖼️ صورة المنتج */
 .cart-img {
   width: 60px;
   height: 60px;
@@ -53,8 +42,6 @@
 .cart-img:hover {
   transform: scale(1.1);
 }
-
-/* 🔢 التحكم في الكمية */
 .d-flex button {
   border: none;
   font-size: 20px;
@@ -70,8 +57,6 @@
   background: #1e1e1e;
   transform: scale(1.1);
 }
-
-/* ❌ زر الحذف */
 .remove-btn {
   background: #ff4d4d;
   border: none;
@@ -86,8 +71,6 @@
   background: #ff1a1a;
   transform: scale(1.2);
 }
-
-/* 💰 المجموع النهائي */
 .total-container {
   text-align: right;
   font-size: 22px;

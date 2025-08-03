@@ -3,17 +3,35 @@
     <div class="card-body">
       <h3 class="card-title text-center mb-4">Login to Your Account</h3>
 
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmitForm()">
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email" formControlName="email" >
+
+
+<!-- Error Message for Email -->
+<div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)" class="alert alert-danger">
+  <div *ngIf="formControls['email'].errors?.['required']">Email is required.</div>
+  <div *ngIf="formControls['email'].errors?.['email']">Please enter a valid email address.</div>
+  <div *ngIf="formControls['email'].errors?.['pattern']">Invalid email format. Example: example&#64;example.com</div>
+  <div *ngIf="formControls['email'].errors?.['minlength']">Email must be at least 3 characters long.</div>
+</div>
+
         </div>
 
         <!-- Password -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password">
+         <!-- Error Message for Password -->
+         <div *ngIf="formControls['password'].invalid && (formControls['password'].dirty || formControls['password'].touched)" class="alert alert-danger">
+          <div *ngIf="formControls['password'].errors?.['required']">Password is required.</div>
+          <div *ngIf="formControls['password'].errors?.['minlength']">Password must be at least 8 characters long.</div>
+          <div *ngIf="formControls['password'].errors?.['maxlength']">Password must be less than 20 characters long.</div>
+          <div *ngIf="formControls['password'].errors?.['pattern']">Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character (&#64;$!%*?&).</div>
+        </div>
+      
         </div>
 
         <!-- Submit Button -->
